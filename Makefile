@@ -5,7 +5,7 @@ BINDIR := $(PREFIX)/bin
 export GOBIN :=$(BINDIR)
 export PATH := $(GOBIN):$(PATH)
 
-all: init fmt validate tflint tfsec
+all: init fmt validate tflint
 
 .PHONY: init
 init: ## Initialize a Terraform working directory
@@ -26,8 +26,3 @@ validate: ## Validates the Terraform files
 tflint: ## Runs tflint on all Terraform files
 	@echo "+ $@"
 	@tflint || exit 2
-
-.PHONY: tfsec
-tfsec: ## Runs tfsec on all Terraform files
-	@echo "+ $@"
-	@tfsec $$d || exit 1

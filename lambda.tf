@@ -1,18 +1,5 @@
-data "archive_file" "notifications_lambda" {
-  type        = "zip"
-  output_path = "${path.module}/notifications.zip"
-
-  source_dir = "${path.module}/files/notifications/"
-}
-
-resource "random_id" "generator" {
-  byte_length = 8
-}
-
-resource "aws_iam_role" "iam_for_lambda" {
-  name = "notifications_lambda_${random_id.generator.id}"
-
-  assume_role_policy = <<EOF
+locals {
+  lambda_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -27,6 +14,24 @@ resource "aws_iam_role" "iam_for_lambda" {
   ]
 }
 EOF
+}
+
+data "archive_file" "notifications_lambda" {
+  type        = "zip"
+  output_path = "${path.module}/notifications.zip"
+
+  source_dir = "${path.module}/files/notifications/"
+}
+
+resource "random_id" "generator" {
+  byte_length = 8
+}
+
+resource "aws_iam_role" "iam_for_lambda" {
+  name = "notifications_lambda_${random_id.generator.id}"
+
+  assume_role_policy = local.lambda_role_policy
+
 }
 
 resource "aws_lambda_function" "notifications_lambda" {
