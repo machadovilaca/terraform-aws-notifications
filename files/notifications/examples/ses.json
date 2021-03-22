@@ -1,0 +1,22 @@
+{
+    "Records": [
+        {
+            "EventSource": "aws:sns",
+            "EventVersion": "1.0",
+            "EventSubscriptionArn": "arn:aws:sns:eu-west-1: 526266413792:ses_tst_deliveries: 52cf7de9-e401-437c-a1cd-6ae0d09802c7",
+            "Sns": {
+                "Type": "Notification",
+                "MessageId": "da11fbf3-8cea-5920-ae7a-a3618e0b1cc1",
+                "TopicArn": "arn:aws:sns:eu-west-1:526266413792:ses_tst_deliveries",
+                "Subject": "None",
+                "Message": "{\"notificationType\": \"Delivery\",\"mail\": {\"timestamp\": \"2021-02-01T13:22:40.910Z\",\"source\": \"no-reply@tst.publicmint.io\",\"sourceArn\": \"arn:aws:ses:eu-west-1:526266413792:identity/tst.publicmint.io\",\"sourceIp\": \"99.80.107.240\",\"sendingAccountId\": \"526266413792\",\"messageId\": \"010201775dc2748e-0afc4009-6919-4493-860d-ebc7b0206ed5-000000\",\"destination\": [\"joaovilaca@seegno.com\"],\"headersTruncated\": false,\"headers\": [{\"name\": \"From\",\"value\": \"no-reply@tst.publicmint.io\"},{\"name\": \"To\",\"value\": \"joaovilaca@seegno.com\"},{\"name\": \"Subject\",\"value\": \"Please confirm your account\"},{\"name\": \"MIME-Version\",\"value\": \"1.0\"},{\"name\": \"Content-Type\",\"value\": \"multipart/alternative;  boundary=\\\"----=_Part_2789201_1205165557.1612185760912\\\"\"}],\"commonHeaders\": {\"from\": [\"no-reply@tst.publicmint.io\"],\"to\": [\"joaovilaca@seegno.com\"],\"subject\": \"Please confirm your account\"}},\"delivery\": {\"timestamp\": \"2021-02-01T13:22:41.948Z\",\"processingTimeMillis\": 1038,\"recipients\": [\"joaovilaca@seegno.com\"],\"smtpResponse\": \"250 2.0.0 OK  1612185761 d17si15939505wrj.495 - gsmtp\",\"remoteMtaIp\": \"74.125.193.27\",\"reportingMTA\": \"a7-42.smtp-out.eu-west-1.amazonses.com\"}}",
+                "Timestamp": "2021-02-01T13: 22: 41.990Z",
+                "SignatureVersion": "1",
+                "Signature": "JrZu33thR7UHqWZFPIdXPsm3QxzpBdMs+UaXST1A+x5xff212WHuZBt4o35b+lx2Wpx3+9sbdtJB0Tux8/tm3F3YoMAOO4Al5T+aSEngleLbFCim9MxXDMTYL11FUvkvKTxjXyR06/p9o3T/UeB6qbJ+0WaBbirmLiidM+Wm2TRbb2R1zUzZlYAE7SDGAvhl7NxyPN7YkO2bxK73+2FBP49xL8bB3lSYKvJ1L6n6H8d86QU6c9M0hf0TaQU1MxCGZsJ6gDu842njVLOxEG739P2591QRfW2++3MDTOJ6xPgUuEt0q0ZpJpyNWQTxJ5MUB0NjeYAb6b7lwb8gr0T/hA==",
+                "SigningCertUrl": "https: //sns.eu-west-1.amazonaws.com/SimpleNotificationService-010a507c1833636cd94bdb98bd93083a.pem",
+                "UnsubscribeUrl": "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:526266413792:ses_tst_deliveries:52cf7de9-e401-437c-a1cd-6ae0d09802c7",
+                "MessageAttributes": {}
+            }
+        }
+    ]
+}
