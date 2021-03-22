@@ -2,6 +2,42 @@
 
 [![Terraform CI](https://github.com/mvg-org/terraform-aws-notifications/actions/workflows/workflow.yaml/badge.svg)](https://github.com/mvg-org/terraform-aws-notifications/actions/workflows/workflow.yaml)
 
+
+## Example Usage
+
+```
+module "notifications" {
+  source = "github.com/mvg-org/terraform-aws-notifications"
+
+  aws_region = var.aws_region
+
+  slack_webhook_url = "https://hooks.slack.com/services/XPTOXPTO/XPTOXPTOXPTOXPTOXPTOXPTOXPTOXPTO"
+  slack_channel     = "#sns-notifications"
+  slack_username    = "sns-notifcations"
+
+  s3_bucket_name = "notification-logs"
+  create_bucket  = true
+
+  sns_subscripted_topics_arns = {
+    (aws_sns_topic.tst_notifications["ses_tst_bounces"].arn) = {
+      targets = ["SLACK", "S3"]
+    },
+    (aws_sns_topic.tst_notifications["ses_tst_complaints"].arn) = {
+      targets = ["SLACK", "S3"]
+    },
+    (aws_sns_topic.tst_notifications["ses_tst_deliveries"].arn) = {
+      targets = ["S3"]
+    }
+  }
+
+  cloudwatch_subscripted_log_group_names = {
+    "sns/eu-west-1/12345678954328/DirectPublishToPhoneNumber" = {
+      targets = ["SLACK"]
+    }
+  }
+}
+```
+
 ## Requirements
 
 | Name | Version |
