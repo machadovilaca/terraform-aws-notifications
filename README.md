@@ -1,17 +1,47 @@
 # terraform-aws-notifications
 
 [![Terraform CI](https://github.com/mvg-org/terraform-aws-notifications/actions/workflows/workflow.yaml/badge.svg)](https://github.com/mvg-org/terraform-aws-notifications/actions/workflows/workflow.yaml)
+![Terraform Version](https://img.shields.io/badge/Terraform-0.12+-green.svg)
+[![Terraform Module Registry](https://img.shields.io/badge/Terraform%20Module%20Registry-latest-blue.svg)](https://registry.terraform.io/modules/machadovilaca/notifications/aws/latest)
+[![License: GPL](https://img.shields.io/badge/License-GPL-green.svg)](https://opensource.org/licenses/GPL-3.0)
 
+## Description
+
+This Terraform module allows you to subscribe to notifications from both SNS
+topics and Cloudwatch log groups. For each of those, you can select where do you
+want to send the notifications to. You have the option to target Slack and/or
+and an S3 bucket.
+
+Subscriptions can be made to any AWS service that sends information to any of the
+previously described sources. In the following example, you can see the
+subscription for SNS alerts concerning 'Bounce', 'Complaint' and 'Delivery' from
+an SES instance, and an alert from Cloudwatch for an SNS mobile message sent.
+
+### Message Formating
+
+**This module supports all messages sent to the subscribed systems**. However,
+as most alerts have a different structure, if one alert message is not currently supported by this module, the notification text will fallback to the alert raw
+content. The supported alerts will be pretty-printed as described in the
+[formats](files/notifications/formats) folder.
+
+Currently being pretty-printed:
+
+- [RDS Notification Messages](files/notifications/formats/rds.py)
+
+- [SES Delivery Status Alerts](files/notifications/formats/ses.py)
+
+- [SMS Deliveries](files/notifications/formats/sms.py)
 
 ## Example Usage
 
 ```
 module "notifications" {
-  source = "github.com/mvg-org/terraform-aws-notifications"
+  source  = "machadovilaca/notifications/aws"
+  version = "0.0.1"
 
   aws_region = var.aws_region
 
-  slack_webhook_url = "https://hooks.slack.com/services/XPTOXPTO/XPTOXPTOXPTOXPTOXPTOXPTOXPTOXPTO"
+  slack_webhook_url = "https://hooks.slack.com/services/MI8EILOH9/EECHAHQUOONGAHK2FU4LAIC7IEZ6EIBA8"
   slack_channel     = "#sns-notifications"
   slack_username    = "sns-notifcations"
 
@@ -37,7 +67,6 @@ module "notifications" {
   }
 }
 ```
-
 ## Requirements
 
 | Name | Version |
@@ -72,13 +101,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `any` | n/a | yes |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | n/a | yes |
 | <a name="input_cloudwatch_subscripted_log_group_names"></a> [cloudwatch\_subscripted\_log\_group\_names](#input\_cloudwatch\_subscripted\_log\_group\_names) | Cloudwatch log groups subscribed to lambda | `map` | `{}` | no |
 | <a name="input_create_bucket"></a> [create\_bucket](#input\_create\_bucket) | Should create bucket? | `bool` | `true` | no |
-| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | S3 bucket name | `any` | n/a | yes |
-| <a name="input_slack_channel"></a> [slack\_channel](#input\_slack\_channel) | Slack channel to send notifications to | `any` | n/a | yes |
-| <a name="input_slack_username"></a> [slack\_username](#input\_slack\_username) | Slack username that will publish notifications | `any` | n/a | yes |
-| <a name="input_slack_webhook_url"></a> [slack\_webhook\_url](#input\_slack\_webhook\_url) | Slack incoming-webhook url | `any` | n/a | yes |
+| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | S3 bucket name | `string` | n/a | yes |
+| <a name="input_slack_channel"></a> [slack\_channel](#input\_slack\_channel) | Slack channel to send notifications to | `string` | n/a | yes |
+| <a name="input_slack_username"></a> [slack\_username](#input\_slack\_username) | Slack username that will publish notifications | `string` | n/a | yes |
+| <a name="input_slack_webhook_url"></a> [slack\_webhook\_url](#input\_slack\_webhook\_url) | Slack incoming-webhook url | `string` | n/a | yes |
 | <a name="input_sns_subscripted_topics_arns"></a> [sns\_subscripted\_topics\_arns](#input\_sns\_subscripted\_topics\_arns) | SNS topic arns subscribed to lambda | `map` | `{}` | no |
 
 ## Outputs
